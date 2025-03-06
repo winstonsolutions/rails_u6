@@ -13,4 +13,13 @@ class Customer < ApplicationRecord
 
   # Scope for finding customers without email
   scope :missing_email, -> { where(email_address: [nil, '']) }
+
+  # Add these two methods for Ransack
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "email_address", "full_name", "id", "notes", "phone_number", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["profile_image_attachment", "profile_image_blob"]
+  end
 end
