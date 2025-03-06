@@ -1,0 +1,28 @@
+<div class="customer-card">
+  <div class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <% if customer.profile_image.attached? %>
+            <%= image_tag customer.profile_image, class: "customer-image" %>
+          <% else %>
+            <%= image_tag 'default_avatar.png', class: "customer-image" %>
+          <% end %>
+        </div>
+        <div class="media-content">
+          <p class="title is-4"><%= customer.full_name %></p>
+          <p class="subtitle is-6">
+            <%= customer.phone_number %>
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>Email: <%= customer.email_address || 'No email provided' %></p>
+        <% if customer.notes.present? %>
+          <p>Notes: <%= customer.notes %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
