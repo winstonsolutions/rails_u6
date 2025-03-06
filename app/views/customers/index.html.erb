@@ -8,24 +8,3 @@
   </div>
 </div>
 
-
-<div class="container">
-  <h1 class="title">Customers (Alphabetized)</h1>
-  <%= link_to 'All Customers', customers_path, class: 'button' %>
-  <%= link_to 'Missing Email', customers_missing_email_path, class: 'button' %>
-
-  <div class="customer-grid">
-    <%= render partial: 'customer', collection: @customers %>
-  </div>
-</div>
-
-# app/views/customers/missing_email.html.erb
-<div class="container">
-  <h1 class="title">Customers Missing Email</h1>
-  <%= link_to 'All Customers', customers_path, class: 'button' %>
-  <%= link_to 'Alphabetized', customers_alphabetized_path, class: 'button' %>
-
-  <div class="customer-grid">
-    <%= render partial: 'customer', collection: @customers %>
-  </div>
-</div>

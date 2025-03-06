@@ -1,0 +1,9 @@
+<div class="container">
+  <h1 class="title">Customers (Alphabetized)</h1>
+  <%= link_to 'All Customers', customers_path, class: 'button' %>
+  <%= link_to 'Missing Email', customers_missing_email_path, class: 'button' %>
+
+  <div class="customer-grid">
+    <%= render partial: 'customer', collection: @customers %>
+  </div>
+</div>
