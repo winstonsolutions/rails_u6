@@ -1,28 +1,38 @@
+<!-- app/views/customers/_customer.html.erb -->
 <div class="customer-card">
-  <div class="card">
-    <div class="card-content">
-      <div class="media">
-        <div class="media-left">
-          <% if customer.profile_image.attached? %>
-            <%= image_tag customer.profile_image, class: "customer-image" %>
-          <% else %>
-            <%= image_tag 'default_avatar.png', class: "customer-image" %>
-          <% end %>
+  <div class="customer-header">
+    <div class="customer-avatar">
+      <% if customer.respond_to?(:profile_image) && customer.profile_image.attached? %>
+        <%= image_tag customer.profile_image, class: "profile-image" %>
+      <% elsif defined?(customer.avatar) && customer.avatar.present? %>
+        <%= image_tag customer.avatar, class: "profile-image" %>
+      <% elsif defined?(customer.image_url) && customer.image_url.present? %>
+        <%= image_tag customer.image_url, class: "profile-image" %>
+      <% else %>
+        <!-- 使用首字母作为头像备用 -->
+        <div class="avatar-placeholder">
+          <%= customer.full_name[0].upcase %>
         </div>
-        <div class="media-content">
-          <p class="title is-4"><%= customer.full_name %></p>
-          <p class="subtitle is-6">
-            <%= customer.phone_number %>
-          </p>
-        </div>
-      </div>
-
-      <div class="content">
-        <p>Email: <%= customer.email_address || 'No email provided' %></p>
-        <% if customer.notes.present? %>
-          <p>Notes: <%= customer.notes %></p>
-        <% end %>
-      </div>
+      <% end %>
     </div>
+    <h3 class="customer-name">
+      <%= customer.full_name %>
+    </h3>
   </div>
+
+  <div class="customer-info">
+    <% if customer.email_address.present? %>
+      <p><i class="fas fa-envelope"></i> <%= customer.email_address %></p>
+    <% else %>
+      <p class="missing-info"><i class="fas fa-exclamation-circle"></i> No email provided</p>
+    <% end %>
+
+    <% if customer.phone_number.present? %>
+      <p><i class="fas fa-phone"></i> <%= customer.phone_number %></p>
+    <% end %>
+
+
+  </div>
+
+
 </div>

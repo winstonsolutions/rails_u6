@@ -1,10 +1,25 @@
-<div class="container">
-  <h1 class="title">All Customers</h1>
-  <%= link_to 'Alphabetized', customers_alphabetized_path, class: 'button' %>
-  <%= link_to 'Missing Email', customers_missing_email_path, class: 'button' %>
+<!-- app/views/customers/index.html.erb -->
+<div class="customers-container">
+  <header class="page-header">
+    <h1 class="page-title">All Customers</h1>
+    <div class="filter-actions">
+      <%= link_to customers_alphabetized_path, class: 'btn btn-primary' do %>
+        <i class="fas fa-sort-alpha-down"></i> Alphabetized
+      <% end %>
+      <%= link_to customers_missing_email_path, class: 'btn btn-warning' do %>
+        <i class="fas fa-envelope"></i> Missing Email
+      <% end %>
+    </div>
+  </header>
 
-  <div class="customer-grid">
-    <%= render partial: 'customer', collection: @customers %>
-  </div>
+  <% if @customers.any? %>
+    <div class="customer-grid">
+      <%= render partial: 'customer', collection: @customers %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No customers found.</p>
+      <%= link_to 'Add Customer', new_customer_path, class: 'btn btn-success' if defined?(new_customer_path) %>
+    </div>
+  <% end %>
 </div>
-
